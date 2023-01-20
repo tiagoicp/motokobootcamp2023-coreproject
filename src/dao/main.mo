@@ -1,6 +1,6 @@
 import Principal "mo:base/Principal";
 
-actor {
+actor SnsHarborDao {
     public shared query (msg) func whoami() : async Principal {
         return msg.caller;
     };

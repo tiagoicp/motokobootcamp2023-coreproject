@@ -16,14 +16,9 @@
       ],
       "type": "assets"
     },
-    "website": {
-      "website": {
-        "entrypoint": "src/website/public/index.html"
-      },
-      "source": [
-        "src/website/public"
-      ],
-      "type": "assets"
+    "webpage": {
+      "main": "src/webpage/src/main.mo",
+      "type": "motoko"
     }
   },
   "defaults": {
