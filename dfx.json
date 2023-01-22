@@ -1,12 +1,25 @@
 {
   "canisters": {
-    "dao": {
-      "main": "src/dao/main.mo",
+    "proposal_service": {
+      "main": "src/proposal_service/main.mo",
+      "type": "motoko"
+    },
+    "dao_service": {
+      "main": "src/dao_service/main.mo",
+      "type": "motoko"
+    },
+    "spec": {
+      "dependencies": [
+        "dao_service",
+        "proposal_service"
+      ],
+      "main": "src/spec/main.mo",
       "type": "motoko"
     },
     "interface": {
       "dependencies": [
-        "dao"
+        "dao_service",
+        "proposal_service"
       ],
       "interface": {
         "entrypoint": "src/interface/public/index.html"
