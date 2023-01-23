@@ -1,4 +1,4 @@
-import Principal "mo:base/Principal";
+import Result "mo:base/Result";
 import Map "mo:hashmap/Map";
 
 import Types "./src/Types";
@@ -11,19 +11,10 @@ actor ProposalDao {
 
     // let votes : [Vote] = [];
 
-    // Methods
-    public shared query (msg) func whoami() : async Principal {
-        return msg.caller;
-    };
-
-    public query func test() : async () {
-        // DbTest.runTests();
-    };
-
     // CRUD
     // ==============
 
-    public func createProposal(principal : Text, body : Text) : () {
+    public shared ({ caller }) func createProposal(body : Text) : async Result.Result<Text, Text> {
         // increment index
         let currentIndex = proposalsIndex;
         proposalsIndex += 1;
@@ -31,12 +22,14 @@ actor ProposalDao {
         // create record
         let p : Types.Proposal = {
             id = currentIndex;
-            principal = principal;
+            principal = caller;
             body = body;
         };
 
         // save in DB
         Map.set(proposals, Map.nhash, currentIndex, p);
+
+        return #ok("Proposal created with success")
     };
 
     // public func getProposal(id : Nat) : async Proposal {

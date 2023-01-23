@@ -1,7 +1,7 @@
 module Types {
     public type Proposal = {
         id : Nat;
-        principal : Text;
+        principal : Principal;
         body : Text;
     };
 

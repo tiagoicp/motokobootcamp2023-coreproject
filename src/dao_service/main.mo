@@ -1,4 +1,3 @@
-import Principal "mo:base/Principal";
 import Result "mo:base/Result";
 import Map "mo:hashmap/Map";
 import Types "./src/Types";
@@ -7,7 +6,6 @@ import Types "./src/Types";
 actor DaoService {
     // Data
     // ==============
-    let { ihash; nhash; thash; phash; calcHash } = Map;
     stable let daos = Map.new<Text, Types.Dao>();
 
     // CRUD
@@ -30,7 +28,7 @@ actor DaoService {
         // save in Map
         Map.set(daos, Map.thash, codename, newDao);
 
-        return #ok("DAO created succesfully");
+        return #ok("DAO created with success");
     };
 
     public query func getDao(codename : Text) : async Result.Result<Types.DaoInfo, Text> {
@@ -41,8 +39,6 @@ actor DaoService {
     };
 
     public shared ({ caller }) func cleanDb() : async () {
-        // assert (caller == creator);
-
         Map.clear(daos);
     };
 };

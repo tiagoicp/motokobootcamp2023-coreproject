@@ -6,7 +6,8 @@ type Dao =
     ledgerCanister : Text;
     principal : Principal
   };
-type Entry<K, V> = (K, ?V, Nat32, [var Entry<K, V>]);
+type Entry<K, V> = (?K, ?V, Nat, Nat);
 actor {
-  stable daos : (Entry<Text, Dao>, [var Nat32])
+  stable daos :
+    {var body : ([var Nat], [var Entry<Text, Dao>], Nat, Nat, Nat)}
 };

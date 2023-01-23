@@ -1,11 +1,11 @@
-import Principal "mo:base/Principal";
-import Debug "mo:base/Debug";
 import Result "mo:base/Result";
+import Debug "mo:base/Debug";
 
 import DaoService "canister:dao_service";
 import ProposalService "canister:proposal_service";
 
-import DaoFactory "./factories/DaoFactory"
+import DaoFactory "./factories/DaoFactory";
+import ProposalFactory "./factories/ProposalFactory";
 
 // Purpose: Specs, doing backend e2e testing on repo canisters
 // Simply call " dfx canister call spec run"
@@ -18,6 +18,7 @@ actor Spec {
     };
 
     public func specDao() : async () {
+        // setup
         await DaoService.cleanDb();
         let aDao = DaoFactory.validDao;
 
@@ -38,7 +39,12 @@ actor Spec {
     };
 
     public func specProposal() : async () {
+        // setup
+        let aProposal = ProposalFactory.validProposal;
+
         // it creates proposals
+        assert (Result.isOk(await ProposalService.createProposal(aProposal.body)));
+
         // it lists proposals
         // it reads a proposal and counts votes // todo cache or re-count system
         //

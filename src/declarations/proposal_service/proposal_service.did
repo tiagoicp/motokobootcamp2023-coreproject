@@ -1,5 +1,8 @@
+type Result = 
+ variant {
+   err: text;
+   ok: text;
+ };
 service : {
-  createProposal: (text, text) -> () oneway;
-  test: () -> () query;
-  whoami: () -> (principal) query;
+  createProposal: (text) -> (Result);
 }

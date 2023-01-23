@@ -1,8 +1,5 @@
 export const idlFactory = ({ IDL }) => {
-  return IDL.Service({
-    'createProposal' : IDL.Func([IDL.Text, IDL.Text], [], ['oneway']),
-    'test' : IDL.Func([], [], ['query']),
-    'whoami' : IDL.Func([], [IDL.Principal], ['query']),
-  });
+  const Result = IDL.Variant({ 'ok' : IDL.Text, 'err' : IDL.Text });
+  return IDL.Service({ 'createProposal' : IDL.Func([IDL.Text], [Result], []) });
 };
 export const init = ({ IDL }) => { return []; };

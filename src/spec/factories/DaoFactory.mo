@@ -1,5 +1,3 @@
-import Principal "mo:base/Principal";
-
 module {
     public type DaoInfo = {
         codename : Text;
