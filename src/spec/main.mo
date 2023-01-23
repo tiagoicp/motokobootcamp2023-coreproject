@@ -5,7 +5,6 @@ import Result "mo:base/Result";
 import DaoService "canister:dao_service";
 import ProposalService "canister:proposal_service";
 
-// Factories
 import DaoFactory "./factories/DaoFactory"
 
 // Purpose: Specs, doing backend e2e testing on repo canisters
@@ -19,6 +18,7 @@ actor Spec {
     };
 
     public func specDao() : async () {
+        await DaoService.cleanDb();
         let aDao = DaoFactory.validDao;
 
         // it creats a DAO
@@ -38,7 +38,11 @@ actor Spec {
     };
 
     public func specProposal() : async () {
-        // TODO
+        // it creates proposals
+        // it lists proposals
+        // it reads a proposal and counts votes // todo cache or re-count system
+        //
+        // it creates votes
 
         // it adds votes
 

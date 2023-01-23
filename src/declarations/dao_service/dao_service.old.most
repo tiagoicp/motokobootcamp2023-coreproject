@@ -1,0 +1,12 @@
+// Version: 1.0.0
+type Dao =
+  {
+    codename : Text;
+    description : Text;
+    ledgerCanister : Text;
+    principal : Principal
+  };
+type Entry<K, V> = (K, ?V, Nat32, [var Entry<K, V>]);
+actor {
+  stable daos : (Entry<Text, Dao>, [var Nat32])
+};

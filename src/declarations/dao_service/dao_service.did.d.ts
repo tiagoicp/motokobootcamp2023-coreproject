@@ -11,6 +11,7 @@ export type Result = { 'ok' : DaoInfo } |
 export type Result_1 = { 'ok' : string } |
   { 'err' : string };
 export interface _SERVICE {
+  'cleanDb' : ActorMethod<[], undefined>,
   'createDao' : ActorMethod<[string, string, string], Result_1>,
   'getDao' : ActorMethod<[string], Result>,
 }

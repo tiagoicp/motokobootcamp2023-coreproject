@@ -1,0 +1,4 @@
+service : {
+  runTests: () -> () query;
+  whoami: () -> (principal) query;
+}

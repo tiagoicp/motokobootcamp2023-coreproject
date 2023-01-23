@@ -7,8 +7,9 @@
 .DS_Store
 **/.DS_Store
 
-# dfx temporary files
+# temporary files
 .dfx/
+.vessel/
 
 # frontend code
 node_modules/

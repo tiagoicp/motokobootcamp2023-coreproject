@@ -15,6 +15,7 @@ type DaoInfo =
    ledgerCanister: text;
  };
 service : {
+  cleanDb: () -> ();
   createDao: (text, text, text) -> (Result_1);
   getDao: (text) -> (Result) query;
 }

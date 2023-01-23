@@ -1,14 +1,13 @@
 import Principal "mo:base/Principal";
+import Map "mo:hashmap/Map";
+
 import Types "./src/Types";
-import Map "./lib/Map";
-import Debug "mo:base/Debug";
 
 // Service Purpose: to create and manage DAOs, Proposals
 actor ProposalDao {
     // Data
     stable var proposalsIndex : Nat = 0;
-
-    let proposals = Map.new<Nat, Types.Proposal>(Map.nhash);
+    let proposals = Map.new<Nat, Types.Proposal>();
 
     // let votes : [Vote] = [];
 
@@ -38,8 +37,6 @@ actor ProposalDao {
 
         // save in DB
         Map.set(proposals, Map.nhash, currentIndex, p);
-
-        Debug.print(debug_show (Map.size(proposals)));
     };
 
     // public func getProposal(id : Nat) : async Proposal {

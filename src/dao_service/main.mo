@@ -1,18 +1,24 @@
 import Principal "mo:base/Principal";
 import Result "mo:base/Result";
+import Map "mo:hashmap/Map";
 import Types "./src/Types";
-import Map "./lib/Map";
 
 // Service Purpose: to create and manage DAOs
 actor DaoService {
     // Data
     // ==============
-    stable var daoIndex : Nat = 0;
-    stable let daos = Map.new<Text, Types.Dao>(Map.thash);
+    let { ihash; nhash; thash; phash; calcHash } = Map;
+    stable let daos = Map.new<Text, Types.Dao>();
 
     // CRUD
     // ==============
     public shared ({ caller }) func createDao(codename : Text, ledgerCanister : Text, description : Text) : async Result.Result<Text, Text> {
+        // check if it does not exist already
+        switch (Map.get(daos, Map.thash, codename)) {
+            case (?d) return #err("Codename already exists");
+            case (_) {};
+        };
+
         // create record
         let newDao : Types.Dao = {
             principal = caller;
@@ -27,10 +33,16 @@ actor DaoService {
         return #ok("DAO created succesfully");
     };
 
-    public query func getDao(codeName : Text) : async Result.Result<Types.DaoInfo, Text> {
-        switch (Map.get(daos, Map.thash, codeName)) {
-            case (?d) { return #ok(d) };
-            case (null) { return #err("Not Found") };
+    public query func getDao(codename : Text) : async Result.Result<Types.DaoInfo, Text> {
+        switch (Map.get(daos, Map.thash, codename)) {
+            case (?d) return #ok(d);
+            case (_) return #err("Not Found");
         };
+    };
+
+    public shared ({ caller }) func cleanDb() : async () {
+        // assert (caller == creator);
+
+        Map.clear(daos);
     };
 };

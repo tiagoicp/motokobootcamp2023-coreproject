@@ -1,0 +1,5 @@
+service : {
+  createProposal: (text, text) -> () oneway;
+  test: () -> () query;
+  whoami: () -> (principal) query;
+}

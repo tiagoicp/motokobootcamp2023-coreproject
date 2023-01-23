@@ -7,6 +7,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const Result = IDL.Variant({ 'ok' : DaoInfo, 'err' : IDL.Text });
   return IDL.Service({
+    'cleanDb' : IDL.Func([], [], []),
     'createDao' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [Result_1], []),
     'getDao' : IDL.Func([IDL.Text], [Result], ['query']),
   });
