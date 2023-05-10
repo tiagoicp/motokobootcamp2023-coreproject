@@ -1,3 +1,0 @@
-service : {
-  createProposal: (text, text) -> () oneway;
-}
